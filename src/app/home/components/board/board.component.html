@@ -1,5 +1,9 @@
 <p>board works!</p>
-<h1>{{board.title}}</h1>
+<h1>{{ board.title }}</h1>
 <ul>
-    <tr-list *ngFor="let list of board.lists" [titleList]="list.title"></tr-list>
+  <tr-list
+    *ngFor="let list of board.lists"
+    [titleList]="list.title"
+    [cardsList]="list.cards"
+  ></tr-list>
 </ul>
