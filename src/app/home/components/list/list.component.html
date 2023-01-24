@@ -1,1 +1,3 @@
-<p>list works!</p>
+<h3>{{titleList}}</h3>
+<!-- <h3>{{cards['title']}}</h3> -->
+<tr-card *ngFor="let card of cards" [titleCard]="card.title"></tr-card>

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import { ICard } from 'src/app/core/interfaces/icard.interface';
 
 @Component({
   selector: 'tr-list',
@@ -6,6 +7,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListComponent {
 
+export class ListComponent {
+    @Input() titleList:string=''; 
+    @Input() cards:ICard={};
 }
