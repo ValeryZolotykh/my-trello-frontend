@@ -1,0 +1,38 @@
+.wrapper__boards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.title__boards{
+    margin-top: 40px;
+    margin-bottom: 40px;   
+}
+
+.board{
+    font-size: large;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 220px;
+    height: 100px;
+    border: 3px solid var(--color_border);
+    border-radius: 45px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    background-color: var(--color_component);
+}
+
+.board:hover{
+    cursor: pointer;
+    background-color: var(--color_hover_component);
+}
+
+.btn__add-board{
+    width: 200px;
+    height: 100px;
+    border: 3px solid var(--color_border);
+    border-radius: 45px;
+} 

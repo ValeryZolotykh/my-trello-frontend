@@ -1,6 +1,10 @@
-.text_cards{
-    font-family: 'Comfortaa', cursive;
-    font-size: 14px;
-    background-color: rgb(202, 207, 217);
-    border-radius: 10px;
+.text_card{
+    text-align: center;
+    background-color: var(--color_component);
+    border-radius: 6px;
+}
+
+.card:hover{
+    cursor: pointer;
+    background-color: var(--color_hover_component);
 }
