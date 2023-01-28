@@ -1,5 +1,5 @@
 <h1 class="title title__boards">Мои доски</h1>
 <div class="wrapper wrapper__boards">
-  <div class="board" *ngFor="let board of boards">{{ board.title }}</div>
+  <div class="board" *ngFor="let board of boards"><a [routerLink]="['board/', board.id]">{{ board.title }} </a></div>
   <button class="btn btn__add-board">+Добавить доску</button>
 </div>

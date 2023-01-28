@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './components/board/board.component';
 import { HomeComponent } from './components/home/home.component';
+import { BoardResolver } from './resolvers/board.resolver';
 
 const routes: Routes = [
   {
@@ -10,7 +11,10 @@ const routes: Routes = [
   },
   {
     path: 'board/:id',
-    component: BoardComponent
+    component: BoardComponent,
+    resolve: {
+      board: BoardResolver
+    }
   }
 ];
 
