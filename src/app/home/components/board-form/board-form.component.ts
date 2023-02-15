@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, Observable, switchMap, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { IBoard2 } from 'src/app/core/interfaces/iboard.interface';
 import { BoardsService } from '../../services/boards.service';
 
 @Component({
@@ -13,7 +11,7 @@ import { BoardsService } from '../../services/boards.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardFormComponent implements OnInit {
-  constructor(private httpClient: HttpClient, private boardService: BoardsService) {}
+  constructor(private boardService: BoardsService) {}
   apiUrl = environment.baseURL;
   boardUrl = this.apiUrl + '/board';
   ngOnInit() {}
@@ -37,6 +35,7 @@ export class BoardFormComponent implements OnInit {
       //тут эта проверка тк ругается тс
       this.boardService.createBoard(boardValue).subscribe(() => {
         console.log("success");
+       
       });
     }
   }
