@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IBoard } from 'src/app/core/interfaces/iboard.interface';
+import { IBoard2 } from 'src/app/core/interfaces/iboard.interface';
 
 @Component({
   selector: 'tr-board',
@@ -10,7 +11,7 @@ import { IBoard } from 'src/app/core/interfaces/iboard.interface';
 })
 
 export class BoardComponent implements OnInit {
-  board?: IBoard;
+  board?: IBoard2;
   
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -25,6 +26,8 @@ export class BoardComponent implements OnInit {
       this.board = board;
     })
   }
+}
+
   // board = {
   //   title: "Моя тестовая доска",
   //   lists: [
@@ -54,4 +57,4 @@ export class BoardComponent implements OnInit {
   //     }
   //   ]
   // }
-}
+

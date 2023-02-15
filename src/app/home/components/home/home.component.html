@@ -1,5 +1,9 @@
 <h1 class="title title__boards">Мои доски</h1>
 <div class="wrapper wrapper__boards">
-  <div class="board" *ngFor="let board of boards"><a [routerLink]="['board/', board.id]">{{ board.title }} </a></div>
-  <button class="btn btn__add-board">+Добавить доску</button>
+  <div class="board" *ngFor="let board of boards">
+    <a [routerLink]="['board/', board.id]">{{ board.title }} </a>
+  </div>
+  <button class="btn btn__add-board" (click)="showModal = true">+Добавить доску</button>
+  <tr-modal-window [showModal]="showModal"></tr-modal-window>
+  <tr-board-form *ngIf="showModal"> </tr-board-form>
 </div>
