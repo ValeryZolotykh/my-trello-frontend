@@ -1,3 +1,31 @@
-<h2 class="title title_list">{{titleList}}</h2>
-<tr-card *ngFor="let card of cardsList" [titleCard]="card.title"></tr-card>
-<button class="btn btn__add-card">+Добавить карточку</button>
+<div class="container__body-list">
+  <button class="btn btn__del-list" (click)="deleteList()">X</button>
+  <h2 class="title title__list" *ngIf="!editingList" (click)="editingList = true">
+    {{ titleList }}
+  </h2>
+  <tr-simple-input-form
+    #inputEditList
+    class="input__edit-list"
+    *ngIf="editingList"
+    (keydown.enter)="editList(inputEditList.getValue())"
+    (blur)="editList(inputEditList.getValue())"
+    [previousValue]="titleList"
+  ></tr-simple-input-form>
+  <tr-card
+    *ngFor="let card of cardsList"
+    [titleCard]="card.title"
+    [idCard]="card.id"
+    (cardDeleted)="onCardDeleted($event)"
+  >
+  </tr-card>
+  <button class="btn btn__add-card" *ngIf="!creatingCard" (click)="creatingCard = true">
+    +Добавить карточку
+  </button>
+  <tr-simple-input-form
+    #inputCreateCard
+    class="input__create-card"
+    *ngIf="creatingCard"
+    (keydown.enter)="createCard(inputCreateCard.getValue())"
+    (blur)="createCard(inputCreateCard.getValue())"
+  ></tr-simple-input-form>
+</div>

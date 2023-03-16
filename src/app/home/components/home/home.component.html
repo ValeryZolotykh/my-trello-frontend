@@ -1,9 +1,24 @@
 <h1 class="title title__boards">Мои доски</h1>
-<div class="wrapper wrapper__boards">
+
+<div class="container__body-boards">
   <div class="board" *ngFor="let board of boards">
-    <a [routerLink]="['board/', board.id]">{{ board.title }} </a>
+    <a class="title title__board" [routerLink]="['board/', board.id]">{{ board.title }} </a>
   </div>
-  <button class="btn btn__add-board" (click)="showModal = true">+Добавить доску</button>
-  <tr-modal-window [showModal]="showModal"></tr-modal-window>
-  <tr-board-form *ngIf="showModal"> </tr-board-form>
+
+  <div *ngIf="creatingBoard" class="form form-create-board">
+    <label class="title title-form">Введите название</label>
+    <tr-simple-input-form #inputCreateBoard></tr-simple-input-form>
+    <button
+      type="submit"
+      class="btn btn__create-board"
+      [disabled]="inputCreateBoard.valueControl.invalid"
+      (click)="createBoard(inputCreateBoard.getValue())"
+    >
+      Создать
+    </button>
+  </div>
+
+  <button *ngIf="!creatingBoard" class="btn btn__add-board" (click)="creatingBoard = true">
+    +Добавить доску
+  </button>
 </div>

@@ -12,7 +12,6 @@
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        // Стайл гайд AirBnB
         "airbnb-typescript/base",
         "prettier/@typescript-eslint",  
         "plugin:prettier/recommended"

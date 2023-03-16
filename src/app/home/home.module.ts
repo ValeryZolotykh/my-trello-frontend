@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { HomeRoutingModule } from './home-routing.module';
 import { BoardComponent } from './components/board/board.component';
 import { ListComponent } from './components/list/list.component';
 import { CardComponent } from './components/card/card.component';
 import { HomeComponent } from './components/home/home.component';
-import { ModalWindowComponent } from './components/modal-window/modal-window.component';
-import { BoardFormComponent } from './components/board-form/board-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { SimpleInputFormComponent } from './components/simple-input-form/simple-input-form.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListComponent,
     CardComponent,
     HomeComponent,
-    ModalWindowComponent,
-    BoardFormComponent
+    SimpleInputFormComponent,
   ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    ReactiveFormsModule
-  ]
+  imports: [CommonModule, HomeRoutingModule, ReactiveFormsModule, HttpClientModule],
 })
-export class HomeModule { }
+export class HomeModule {}

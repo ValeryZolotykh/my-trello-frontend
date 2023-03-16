@@ -1,20 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
-  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+/*Import font-family*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
+/*Import pop-up notifications*/
+@import  'ngx-toastr/toastr' ;
+
+
 :root {
     --color_background:#05051c;
     --color_btn: #4A4E69;
     --color_border: #9A8C98;
-    --color_component: #ffffff;
+    --color_component: #ffffffdb;
     --color_hover_component: #ffece8;
     --color_text: #F2E9E4;
 }
+
 body{
     background-color: var(--color_background);
     font-family: 'Raleway', sans-serif;
 }
+
 ul{
     display: flex;
 }
+
 .title{
     text-align: center;
     color: var(--color_text)
@@ -28,9 +36,19 @@ ul{
     background-color: var(--color_btn);
     color: var(--color_text);
     font-size: large;
+    border-radius: 30px; 
 }
+
 a{
     text-decoration: none;
     color: black;
 }
 
+input{
+    font-family: 'Raleway', sans-serif;
+    font-weight: bolder;
+    font-size: large;
+    height: 20px;
+    width: 240px;
+    text-align: center;
+}

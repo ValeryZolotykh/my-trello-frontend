@@ -1,43 +1,52 @@
-import { ChangeDetectionStrategy, Input, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IBoard } from 'src/app/core/interfaces/iboard.interface';
+import { switchMap } from 'rxjs/operators';
+import { IBoards } from 'src/app/core/interfaces/iboards.interface';
+import { BoardsService } from '../../services/boards.service';
 
 @Component({
   selector: 'tr-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class HomeComponent implements OnInit {
-  boards: IBoard[] = [];
-  showModal = false;
-  
+  boards: IBoards[] = [];
+  creatingBoard = false;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-  ) { }
+    private cdRef: ChangeDetectorRef,
+    private boardService: BoardsService,
+  ) {}
 
   ngOnInit(): void {
     this.initBoards();
   }
 
+  /**
+   *  Initializing the boards. Getting data before loading of the boards page.
+   */
   private initBoards(): void {
     this.activatedRoute.data.subscribe(({ boards }) => {
       this.boards = boards;
-    })
+    });
   }
 
+  /**
+   * Creating the new board and updating current home page.
+   * @param titleBoard title of the new board.
+   */
+  public createBoard(titleBoard: string): void {
+    if (titleBoard != undefined && titleBoard != null) {
+      this.boardService
+        .createBoard(titleBoard)
+        .pipe(switchMap(() => this.boardService.getBoards()))
+        .subscribe((boards) => {
+          this.boards = boards;
+          this.cdRef.markForCheck();
+        });
+    }
+    this.creatingBoard = false;
+  }
 }
-
-// export class HomeComponent {
-//   boards: IBoard[] = [
-//     {id: 1, title: "покупки"},
-//     {id: 2, title: "подготовка к свадьбе"},
-//     {id: 3, title: "разработка интернет-магазина"},
-//     {id: 4, title: "курс по продвижению в соцсетях"},
-//     {id: 5, title: "курс по продвижению в соцсетях"},
-//     {id: 6, title: "курс по продвижению в соцсетях"},
-//     {id: 7, title: "курс по продвижению в соцсетях"}
-//   ];
-// }

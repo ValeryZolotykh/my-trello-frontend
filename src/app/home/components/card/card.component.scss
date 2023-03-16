@@ -1,10 +1,27 @@
-.text_card{
-    text-align: center;
-    background-color: var(--color_component);
+.container__body-card{
+    background-color: var(--color_component);   
     border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
 
-.card:hover{
+.container__body-card:hover{
     cursor: pointer;
     background-color: var(--color_hover_component);
+}
+
+.title__card{
+    color: black;
+    margin: 0;
+    margin-left: 5px;
+    font-size: 20px;
+    word-break: break-all;
+}
+
+.btn__del-card{
+   border-radius: 0;
+   width: 30px;
+   background-color: rgba(4, 60, 110, 0.071);
+   color: black;
 }

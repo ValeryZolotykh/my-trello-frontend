@@ -1,24 +1,16 @@
 import { Injectable } from '@angular/core';
-import {
-  Router, Resolve,
-  RouterStateSnapshot,
-  ActivatedRouteSnapshot
-} from '@angular/router';
+import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { IBoard } from 'src/app/core/interfaces/iboard.interface';
-import { IBoard2 } from 'src/app/core/interfaces/iboard.interface';
+import { IBoards } from 'src/app/core/interfaces/iboards.interface';
 import { BoardsService } from '../services/boards.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class BoardsResolver implements Resolve<IBoard2[]> {
-  constructor (
-    private readonly boardsService: BoardsService,
-  ) {}
-  //resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):......
-  resolve(): Observable<IBoard2[]> {
+export class BoardsResolver implements Resolve<IBoards[]> {
+  constructor(private readonly boardsService: BoardsService) {}
+  resolve(): Observable<IBoards[]> {
+    console.log(this.boardsService.getBoards());
     return this.boardsService.getBoards();
-  } 
-  
+  }
 }

@@ -3,27 +3,27 @@ import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './components/board/board.component';
 import { HomeComponent } from './components/home/home.component';
 import { BoardResolver } from './resolvers/board.resolver';
-import { BoardsResolver} from './resolvers/boards.resolver';
+import { BoardsResolver } from './resolvers/boards.resolver';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: HomeComponent,
     resolve: {
-      boards: BoardsResolver
-    }
+      boards: BoardsResolver,
+    },
   },
   {
     path: 'board/:id',
     component: BoardComponent,
     resolve: {
-      board: BoardResolver
-    }
-  }
+      board: BoardResolver,
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}

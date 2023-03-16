@@ -1,0 +1,25 @@
+<div class="container__input-form">
+  <input
+    class="input-form"
+    [formControl]="valueControl"
+    (keyup.enter)="onEnter()"
+    (blur)="onBlur()"
+    [ngClass]="{
+      'invalid-input': valueControl.invalid && (valueControl.dirty || valueControl.touched)
+    }"
+  />
+  <div
+    class="error_message"
+    *ngIf="
+      valueControl &&
+      valueControl.errors &&
+      valueControl.invalid &&
+      (valueControl.dirty || valueControl.touched)
+    "
+  >
+    <div *ngIf="valueControl.errors['required']">Значение не может быть пустым</div>
+    <div *ngIf="valueControl.errors['minlength']">Значение должно быть более 2 символов</div>
+    <div *ngIf="valueControl.errors['maxlength']">Значение должно быть более 30 символов</div>
+    <div *ngIf="valueControl.errors['pattern']">Недопустимый символ</div>
+  </div>
+</div>

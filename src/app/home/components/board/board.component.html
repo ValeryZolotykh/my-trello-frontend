@@ -1,10 +1,43 @@
-<!-- <p>board works!</p> -->
-<h1 class="title title__board">{{board?.title}}</h1>
-<ul>
-  <tr-list
-    *ngFor="let list of board?.lists"
-    [titleList]="list.title"
-    [cardsList]="list.cards"
-  ></tr-list>
-  <button class="btn btn__add-board">+Добавить список</button>
-</ul>
+<div class="container__head-board">
+  <button class="btn btn__back-to-home" (click)="linkToBack()">&lt;</button>
+  <h1 class="title title__board" *ngIf="!editingBoard" (click)="editingBoard = true">
+    {{ board?.title }}
+  </h1>
+  <tr-simple-input-form
+    #inputEditBoard
+    class="input__edit-board"
+    *ngIf="editingBoard"
+    (keydown.enter)="editBoard(inputEditBoard.getValue())"
+    (blur)="editBoard(inputEditBoard.getValue())"
+    [previousValue]="board!.title"
+  ></tr-simple-input-form>
+  <button class="btn btn__del-board" (click)="deleteBoard()">Удалить доску</button>
+</div>
+
+<div class="container__body-board">
+  <ul>
+    <tr-list
+      *ngFor="let list of board?.lists"
+      [titleList]="list.title"
+      [cardsList]="list.cards"
+      [idList]="list.id"
+      (listDeleted)="onListDeleted($event)"
+      (listEdited)="onListEdited()"
+      (cardCreated)="onCardCreated()"
+    ></tr-list>
+    <button class="btn btn__add-list" *ngIf="!creatingList" (click)="creatingList = true">
+     +Добавить список
+    </button>
+    <div class="form form-create-list" *ngIf="creatingList">
+      <label class="title title-form">Введите название:</label>
+      <tr-simple-input-form #inputCreateList></tr-simple-input-form>
+      <button
+        class="btn btn__create-list"
+        [disabled]="inputCreateList.valueControl.invalid"
+        (click)="createList(inputCreateList.getValue())"
+      >
+        Создать
+      </button>
+    </div>
+  </ul>
+</div>
