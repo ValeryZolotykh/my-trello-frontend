@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { last } from 'rxjs';
 import { IBoard } from 'src/app/core/interfaces/iboard.interface';
 import { BoardsService } from '../../services/boards.service';
 import { ListsService } from '../../services/lists.service';
@@ -21,8 +20,11 @@ export class BoardComponent implements OnInit {
   ) {}
 
   board?: IBoard;
+
   idBoard = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+
   creatingList = false;
+
   editingBoard = false;
 
   ngOnInit(): void {
@@ -111,8 +113,8 @@ export class BoardComponent implements OnInit {
     this.creatingList = false;
 
     if (titleList != undefined && titleList != null) {
-      let currentLists = this.board!.lists;
-      let lastList = currentLists[currentLists?.length - 1];
+      const currentLists = this.board!.lists;
+      const lastList = currentLists[currentLists?.length - 1];
       let position = lastList === undefined ? 0 : lastList.position;
 
       this.listsService.createList(this.idBoard, titleList, ++position).subscribe(() => {

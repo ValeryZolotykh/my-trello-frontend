@@ -13,6 +13,7 @@ export class BoardsService {
   constructor(private httpClient: HttpClient, private notification: ToastrService) {}
 
   apiUrl = environment.baseURL;
+
   boardUrl = this.apiUrl + '/board';
 
   /**
@@ -41,7 +42,7 @@ export class BoardsService {
    * @param titleBoard title of new board
    * @returns response from API
    */
-  public createBoard(titleBoard: string): Observable<HttpResponse<Object>> {
+  public createBoard(titleBoard: string): Observable<HttpResponse<object>> {
     const response = this.httpClient.post(
       this.boardUrl,
       { title: titleBoard },
@@ -61,7 +62,7 @@ export class BoardsService {
    * @param titleBoard new title of board
    * @returns response from API
    */
-  public editBoard(idBoard: number, titleBoard: string): Observable<HttpResponse<Object>> {
+  public editBoard(idBoard: number, titleBoard: string): Observable<HttpResponse<object>> {
     const response = this.httpClient.put(
       this.boardUrl + '/' + idBoard,
       { title: titleBoard },
@@ -76,7 +77,7 @@ export class BoardsService {
    * @param idBoard id of certain board to be deleted.
    * @returns response from API
    */
-  public deleteBoard(idBoard: number): Observable<HttpResponse<Object>> {
+  public deleteBoard(idBoard: number): Observable<HttpResponse<object>> {
     const response = this.httpClient.delete(this.boardUrl + '/' + idBoard, {
       headers: { Authorization: 'Bearer 123' },
       observe: 'response',
@@ -92,7 +93,7 @@ export class BoardsService {
    * @param errorMessage message in failed response
    */
   private catchResponse(
-    response: Observable<HttpResponse<Object>>,
+    response: Observable<HttpResponse<object>>,
     successMessage: string,
     errorMessage: string,
   ): void {

@@ -18,9 +18,10 @@ import { ToastrService } from 'ngx-toastr';
 export class SimpleInputFormComponent implements OnInit {
   constructor(private notification: ToastrService) {}
 
-  @Input() previousValue: string = '';
+  @Input() previousValue = '';
 
   @Output() blur: EventEmitter<void> = new EventEmitter<void>();
+
   @Output() enter: EventEmitter<void> = new EventEmitter<void>();
 
   /**

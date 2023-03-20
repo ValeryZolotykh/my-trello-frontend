@@ -14,8 +14,9 @@ export class CardComponent {
     private readonly activatedRoute: ActivatedRoute,
   ) {}
 
-  @Input() titleCard: string = '';
-  @Input() idCard: number = 0;
+  @Input() titleCard = '';
+
+  @Input() idCard = 0;
 
   @Output() cardDeleted = new EventEmitter();
 
@@ -23,7 +24,7 @@ export class CardComponent {
    * Deleting of the card and updating the board page.
    */
   public deleteCard(): void {
-    let idBoard = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    const idBoard = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.cardsService.deleteCard(idBoard, this.idCard).subscribe(() => {
       this.cardDeleted.emit(this.idCard); //send event to parent-component(listComponent) to update view of the list after response from the API about successful deleting card
     });

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IBoards } from 'src/app/core/interfaces/iboards.interface';
 import { BoardsService } from '../services/boards.service';
 
@@ -9,8 +9,8 @@ import { BoardsService } from '../services/boards.service';
 })
 export class BoardsResolver implements Resolve<IBoards[]> {
   constructor(private readonly boardsService: BoardsService) {}
+
   resolve(): Observable<IBoards[]> {
-    console.log(this.boardsService.getBoards());
     return this.boardsService.getBoards();
   }
 }

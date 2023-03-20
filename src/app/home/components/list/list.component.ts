@@ -17,19 +17,26 @@ export class ListComponent {
     private cardsService: CardsService,
   ) {}
 
-  @Input() idList: number = 0;
-  @Input() titleList: string = '';
+  @Input() idList = 0;
+
+  @Input() titleList = '';
+
   @Input() cardsList: ICards[] = [];
 
   @Output() listDeleted = new EventEmitter();
+
   @Output() listEdited = new EventEmitter();
 
   @Output() cardDeleted = new EventEmitter();
+
   @Output() cardCreated = new EventEmitter();
 
   idBoard = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+
   editingList = false;
+
   creatingCard = false;
+
   isCardCreated = false;
 
   /**
@@ -74,7 +81,7 @@ export class ListComponent {
   public createCard(titleCard: string): void {
     this.creatingCard = false;
     if (titleCard != null && titleCard != undefined) {
-      let lastCard = this.cardsList[this.cardsList?.length - 1];
+      const lastCard = this.cardsList[this.cardsList?.length - 1];
       let position = lastCard === undefined ? 0 : lastCard.position;
       this.cardsService
         .createCard(this.idBoard, titleCard, this.idList, ++position)

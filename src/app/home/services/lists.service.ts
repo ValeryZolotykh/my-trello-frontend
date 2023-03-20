@@ -9,7 +9,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ListsService {
   constructor(private httpClient: HttpClient, private notification: ToastrService) {}
+
   apiUrl = environment.baseURL;
+
   boardUrl = this.apiUrl + '/board';
 
   /**
@@ -23,7 +25,7 @@ export class ListsService {
     idBoard: number,
     titleList: string,
     position: number,
-  ): Observable<HttpResponse<Object>> {
+  ): Observable<HttpResponse<object>> {
     const response = this.httpClient.post(
       this.boardUrl + '/' + idBoard + '/list',
       { title: titleList, position: position },
@@ -44,7 +46,7 @@ export class ListsService {
     idBoard: number,
     titleList: string,
     idList: number,
-  ): Observable<HttpResponse<Object>> {
+  ): Observable<HttpResponse<object>> {
     const response = this.httpClient.put(
       this.boardUrl + '/' + idBoard + '/list/' + idList,
       { title: titleList },
@@ -60,7 +62,7 @@ export class ListsService {
    * @param idList id of certain list to be deleted.
    * @returns response from API
    */
-  public deleteList(idBoard: number, idList: number): Observable<HttpResponse<Object>> {
+  public deleteList(idBoard: number, idList: number): Observable<HttpResponse<object>> {
     const response = this.httpClient.delete(this.boardUrl + '/' + idBoard + '/list/' + idList, {
       headers: { Authorization: 'Bearer 123' },
       observe: 'response',
@@ -76,7 +78,7 @@ export class ListsService {
    * @param errorMessage message in failed response
    */
   private catchResponse(
-    response: Observable<HttpResponse<Object>>,
+    response: Observable<HttpResponse<object>>,
     successMessage: string,
     errorMessage: string,
   ): void {

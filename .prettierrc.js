@@ -1,6 +1,8 @@
-export const trailingComma = "all";
-export const tabWidth = 2;
-export const semi = true;
-export const singleQuote = true;
-export const bracketSpacing = true;
-export const printWidth = 100;
+module.exports = {
+  trailingComma: 'all',
+  tabWidth: 2,
+  semi: true,
+  singleQuote: true,
+  bracketSpacing: true,
+  printWidth: 100,
+};

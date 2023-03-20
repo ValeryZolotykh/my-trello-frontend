@@ -12,6 +12,7 @@ import { BoardsService } from '../../services/boards.service';
 })
 export class HomeComponent implements OnInit {
   boards: IBoards[] = [];
+
   creatingBoard = false;
 
   constructor(
