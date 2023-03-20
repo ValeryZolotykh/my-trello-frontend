@@ -20,7 +20,7 @@ export class SimpleInputFormComponent implements OnInit {
 
   @Input() previousValue = '';
 
-  @Output() blur: EventEmitter<void> = new EventEmitter<void>();
+  @Output() lostFocus: EventEmitter<void> = new EventEmitter<void>();
 
   @Output() enter: EventEmitter<void> = new EventEmitter<void>();
 
@@ -33,7 +33,7 @@ export class SimpleInputFormComponent implements OnInit {
     Validators.required,
     Validators.minLength(2),
     Validators.maxLength(30),
-    Validators.pattern(/^[а-яa-zА-ЯA-Z0-9_-\s\.]*$/),
+    Validators.pattern(/^[а-яa-zА-ЯA-Z0-9_\s.-]*$/),
   ]);
 
   ngOnInit(): void {
@@ -58,13 +58,13 @@ export class SimpleInputFormComponent implements OnInit {
    * This method emits an 'blur' event for input.
    */
   public onBlur(): void {
-    this.blur.emit();
+    this.lostFocus.emit();
   }
 
   /**
    * This method emits an 'enter' key-event for input.
    */
   public onEnter(): void {
-    this.enter.emit();
+    this.lostFocus.emit();
   }
 }

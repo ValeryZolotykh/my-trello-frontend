@@ -7,8 +7,8 @@
     #inputEditBoard
     class="input__edit-board"
     *ngIf="editingBoard"
-    (keydown.enter)="editBoard(inputEditBoard.getValue())"
-    (blur)="editBoard(inputEditBoard.getValue())"
+    (enter)="editBoard(inputEditBoard.getValue())"
+    (lostFocus)="editBoard(inputEditBoard.getValue())"
     [previousValue]="board!.title"
   ></tr-simple-input-form>
   <button class="btn btn__del-board" (click)="deleteBoard()">Удалить доску</button>
