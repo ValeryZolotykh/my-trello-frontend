@@ -3,4 +3,3 @@ export interface ICards {
   title: string;
   position: number;
 }
-[];
