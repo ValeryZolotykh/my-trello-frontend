@@ -13,11 +13,14 @@
   ></tr-simple-input-form>
   <tr-card
     *ngFor="let card of cardsList"
+    [card]="card"
     [titleCard]="card.title"
     [idCard]="card.id"
     (cardDeleted)="onCardDeleted($event)"
-  >
-  </tr-card>
+    (cardDragged)="onCardDragged($event)"
+    (cardDraggedOldList)="onCardDraggedOldList($event)"
+    [idList]="idList"
+  ></tr-card>
   <button class="btn btn__add-card" *ngIf="!creatingCard" (click)="creatingCard = true">
     +Добавить карточку
   </button>

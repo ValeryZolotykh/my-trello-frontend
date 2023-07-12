@@ -1,14 +1,33 @@
+// .drop_zone{
+//     background-color: rgba(0, 106, 255, 0.466);
+//     height: 35px; 
+//     width: 250px;
+//     border-radius: 5px;
+//     text-align: center;
+//     margin-bottom: 20px;
+//     border: 2px dashed #333;
+// }
+
+.drop{
+    border: 2px dashed rgb(255, 0, 0);
+    height: 200px;
+    width: 200px;
+  }
+
 .container__body-card{
+    margin-bottom: 25px;
+}
+
+.content-card:hover{
+    cursor: pointer;
+    background-color: var(--color_hover_component);
+}
+
+.content-card{
     background-color: var(--color_component);   
     border-radius: 6px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
-}
-
-.container__body-card:hover{
-    cursor: pointer;
-    background-color: var(--color_hover_component);
 }
 
 .title__card{

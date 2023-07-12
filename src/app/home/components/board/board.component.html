@@ -24,6 +24,8 @@
       (listDeleted)="onListDeleted($event)"
       (listEdited)="onListEdited()"
       (cardCreated)="onCardCreated()"
+      (cardDragged)="onCardDragged()"
+      (cardDragged2)="onCardDragged2($event)"
     ></tr-list>
     <button class="btn btn__add-list" *ngIf="!creatingList" (click)="creatingList = true">
       +Добавить список

@@ -33,7 +33,7 @@ export class CardsService {
       { title: titleCard, list_id: idList, position: position },
       { headers: { Authorization: 'Bearer 123' }, observe: 'response' },
     );
-    this.catchResponse(response, 'Карточка создана!', 'Карточка не создана!');
+    // this.catchResponse(response, 'Карточка создана!', 'Карточка не создана!');
     return response;
   }
 
@@ -48,7 +48,19 @@ export class CardsService {
       headers: { Authorization: 'Bearer 123' },
       observe: 'response',
     });
-    this.catchResponse(response, 'Карточка удалена!', 'Карточка не удалена!');
+    // this.catchResponse(response, 'Карточка удалена!', 'Карточка не удалена!');
+    return response;
+  }
+
+  public editCard( cards: {id: number, position: number, list_id: number}[], idBoard:number ): Observable<HttpResponse<object>> {
+    const response = this.httpClient.put(
+      this.boardUrl + '/' + idBoard + '/card/',
+     cards,
+      {
+        headers: { Authorization: 'Bearer 123' },
+        observe: 'response',
+      },
+    );
     return response;
   }
 

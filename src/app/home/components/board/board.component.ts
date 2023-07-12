@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IBoard } from 'src/app/core/interfaces/iboard.interface';
+import { ICards } from 'src/app/core/interfaces/icards.interface';
 import { BoardsService } from '../../services/boards.service';
+import { CardsService } from '../../services/cards.service';
 import { ListsService } from '../../services/lists.service';
 
 @Component({
@@ -17,6 +19,7 @@ export class BoardComponent implements OnInit {
     private boardService: BoardsService,
     private router: Router,
     private listsService: ListsService,
+    private cardsService: CardsService,
   ) {}
 
   board?: IBoard;
@@ -29,6 +32,7 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.initBoard();
+    console.log(this.board?.lists);
   }
 
   /**
@@ -102,6 +106,49 @@ export class BoardComponent implements OnInit {
     this.boardService.getBoard(this.idBoard).subscribe((response) => {
       this.board = response;
       this.cdRef.markForCheck();
+    });
+  }
+
+  onCardDragged(): void {
+    this.boardService.getBoard(this.idBoard).subscribe((response) => {
+      this.board = response;
+      this.cdRef.markForCheck();
+    });
+  }
+
+  onCardDragged2(dataDrag: any): void {
+    this.board?.lists.findIndex((list) => {
+      /* Карточки которые нужно обновить */
+      let cardsUpdated: ICards[] = [];
+      const cardsForRequest: { id: number; position: number; list_id: number }[] = [];
+
+      /* Отрeзаем массив */
+      if (list.id === dataDrag.idList) {
+        for (let i = 0; i < list.cards.length; i++) {
+          if (list.cards[i].position === dataDrag.position) {
+            cardsUpdated = list.cards.slice(i + 1);
+          }
+        }
+        console.log('Cпиоск карточек которым нужно сделать -1 к позиции');
+        console.log(cardsUpdated);
+
+        for (let i = 0; i < cardsUpdated.length; i++) {
+          const idCard: number = cardsUpdated[i].id;
+          const position: number = cardsUpdated[i].position - 1;
+          const idList = dataDrag.idList;
+          const obj = { id: idCard, position: position, list_id: idList };
+          cardsForRequest.push(obj);
+        }
+        console.log("Обноbленный список с -1 позицией")
+        console.log(cardsForRequest);
+
+        /* Обновляем борд */
+        this.cardsService.editCard(cardsForRequest, this.idBoard).subscribe(() => {
+          this.boardService.getBoard(this.idBoard).subscribe((response) => {
+            console.log(response);
+          });
+        });
+      }
     });
   }
 

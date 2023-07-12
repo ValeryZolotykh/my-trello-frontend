@@ -31,6 +31,10 @@ export class ListComponent {
 
   @Output() cardCreated = new EventEmitter();
 
+  @Output() cardDragged = new EventEmitter();
+  @Output() cardDraggedOldList = new EventEmitter();
+  // @Output() cardDragged2 = new EventEmitter();
+
   idBoard = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
   editingList = false;
@@ -73,6 +77,83 @@ export class ListComponent {
       1,
     );
   }
+
+  onCardDragged(position: number): void {
+   // console.log('ID LIST куда перместилась карточка: ' + this.idList);
+    console.log("_______________________________________")
+    console.log('Список, куда была перемещена, без изменений:');
+    console.log(this.cardsList);
+
+    /* Карточки которые нужно обновить */
+    let cardsUpdated: ICards[] = [];
+    const cardsForRequest: { id: number; position: number; list_id: number }[] = [];
+
+    /* Отрeзаем массив */
+    // cardsUpdated = this.cardsList.splice(0, position-1);
+    // console.log("ZDSI IZMETILA NADEYUS PRAVILNO")
+    // console.log(cardsUpdated);
+
+    for (let i = 0; i < this.cardsList.length; i++) {
+      if (this.cardsList[i].position === position) {
+        cardsUpdated = this.cardsList.slice(i);
+      }
+    }
+    // cardsUpdated = this.cardsList.slice(position);
+    console.log("Карточки которые нужно обносить на +1 ")
+    console.log(cardsUpdated);
+
+    //Увеличиваем позиции этих карточек и формируем массив объектов для пут-запроса
+    for (let i = 0; i < cardsUpdated.length; i++) {
+      const idCard: number = cardsUpdated[i].id;
+      const position: number = 1 + cardsUpdated[i].position;
+      const idList = this.idList;
+      const obj = { id: idCard, position: position, list_id: idList };
+      cardsForRequest.push(obj);
+    }
+    console.log("Обновлённые карточки на +1");
+    console.log(cardsForRequest);
+
+    this.cardsService.editCard(cardsForRequest, this.idBoard).subscribe(() => {
+      this.cardDragged.emit();
+    });
+  }
+
+  onCardDraggedOldList(position: number): void {
+    console.log("_______________________________________")
+    console.log('Список, откуда была перемещена, без изменений:');
+    console.log(this.cardsList);
+    /* Карточки которые нужно обновить */
+    let cardsUpdated: ICards[] = [];
+    const cardsForRequest: { id: number; position: number; list_id: number }[] = [];
+
+    /* Отрeзаем массив */
+    cardsUpdated = this.cardsList.slice(position);
+
+    console.log("Карточки которые нужно обносить на -1 ")
+    console.log(cardsUpdated);
+
+    //Увеличиваем позиции этих карточек и формируем массив объектов для пут-запроса
+    for (let i = 0; i < cardsUpdated.length; i++) {
+      const idCard: number = cardsUpdated[i].id;
+      const position: number = cardsUpdated[i].position - 1;
+      const idList = this.idList;
+      const obj = { id: idCard, position: position, list_id: idList };
+      cardsForRequest.push(obj);
+    }
+    console.log("Обновлённые карточки на -1");
+    console.log(cardsForRequest);
+
+    this.cardsService.editCard(cardsForRequest, this.idBoard).subscribe(() => {
+      this.cardDragged.emit();
+    });
+  }
+
+  // onCardDragged2(dragData: any):void{
+  //   this.cardDragged2.emit(dragData);
+  //   console.log("XZ SHO eto: ")
+  //   console.log(dragData);
+  //   console.log()
+  // }
 
   /**
    * Creating the new card and updating the board page.
