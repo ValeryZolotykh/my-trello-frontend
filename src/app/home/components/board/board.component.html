@@ -18,14 +18,14 @@
   <ul>
     <tr-list
       *ngFor="let list of board?.lists"
+      [list]="list"
       [titleList]="list.title"
       [cardsList]="list.cards"
       [idList]="list.id"
       (listDeleted)="onListDeleted($event)"
       (listEdited)="onListEdited()"
       (cardCreated)="onCardCreated()"
-      (cardDragged)="onCardDragged()"
-      (cardDragged2)="onCardDragged2($event)"
+      (cardDragged)="onCardDragged($event)"
     ></tr-list>
     <button class="btn btn__add-list" *ngIf="!creatingList" (click)="creatingList = true">
       +Добавить список

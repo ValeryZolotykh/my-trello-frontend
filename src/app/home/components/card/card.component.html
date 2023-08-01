@@ -1,30 +1,4 @@
-<!-- <div
-  class="container__body-card"
-  draggable="true"
-  (dragstart)="onDragStart($event)"
-  (dragenter)="onDragEnter($event)"
-> -->
-
-<!-- <div
-  class="drop_zone"
-  *ngIf="showDropZone"
-  (dragleave)="onDragLeave($event)"
-  (dragover)="onDragOver($event)"
-  (drop)="onDragDrop($event)"
->
-  Drop-zone
-</div> -->
-
-<div
-  class="container__body-card"
-
-  (dragenter)="onDragEnter($event)"
-  (dragleave)="onDragLeave($event)"
-  (drop)="onDragDrop($event)"
->
-  <div class="content-card" draggable="true" (dragstart)="onDragStart($event)">
-    <h2 class="title title__card">{{ titleCard }}</h2>
-    <button class="btn btn__del-card" (click)="deleteCard()">x</button>
-  </div>
+<div class="content-card">
+  <h2 class="title title__card">{{ titleCard }}</h2>
+  <button class="btn btn__del-card" (click)="deleteCard()">x</button>
 </div>
-

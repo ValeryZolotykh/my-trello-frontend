@@ -1,4 +1,9 @@
-<div class="container__body-list">
+<div
+  class="container__body-list"
+  (dragenter)="onDragEnterEmptyList($event)"
+  (dragleave)="onDragLeaveEmptyList($event)"
+  (drop)="onDragDrop($event)"
+>
   <button class="btn btn__del-list" (click)="deleteList()">X</button>
   <h2 class="title title__list" *ngIf="!editingList" (click)="editingList = true">
     {{ titleList }}
@@ -12,14 +17,16 @@
     [previousValue]="titleList"
   ></tr-simple-input-form>
   <tr-card
+    class="card"
     *ngFor="let card of cardsList"
-    [card]="card"
     [titleCard]="card.title"
     [idCard]="card.id"
     (cardDeleted)="onCardDeleted($event)"
-    (cardDragged)="onCardDragged($event)"
-    (cardDraggedOldList)="onCardDraggedOldList($event)"
-    [idList]="idList"
+    draggable="true"
+    (dragstart)="onDragStart($event, card)"
+    (dragenter)="onDragEnter($event, card)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDragDrop($event)"
   ></tr-card>
   <button class="btn btn__add-card" *ngIf="!creatingCard" (click)="creatingCard = true">
     +Добавить карточку
